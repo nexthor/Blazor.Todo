@@ -1,9 +1,14 @@
 ﻿@page "/"
+@using Blazor.Todo.Pages.Components
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+<div class="row">
+    <div class="col-12 col-md-6 offset-md-3">
+        <!-- formulario para agregar una tarea -->
+        <AssignmentForm HandleAddAssignment="AddAssignment" />
+        <hr />
+        <!-- listado de tareas con su botón para borrar la seleccionada o darle finalizar -->
+        <Assignments AssignmentsList="assignments" HandleUpdateAssignment="UpdateAssignment" />
+    </div>
+</div>
