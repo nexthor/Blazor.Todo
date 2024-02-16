@@ -1,1 +1,3 @@
-check the example here: https://blazor.to-do.nexthor.dev
+# Blazor.SimpleCalculator
+
+check the demo here: https://blazor.to-do.nexthor.dev
