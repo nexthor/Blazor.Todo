@@ -1,10 +1,11 @@
-﻿<EditForm OnValidSubmit="OnValidSubmit" Model="Assignment">
+﻿<EditForm OnValidSubmit="OnValidSubmit" EditContext="_editContext">
+    <DataAnnotationsValidator />
     <div class="mb-3">
         <label class="form-label">Assignment title:</label>
-        <InputText class="form-control" @bind-Value="Assignment.Title" required />
+        <InputText class="form-control" @bind-Value="Assignment.Title" />
         <ValidationMessage For="() => Assignment.Title" class="text-danger" />
     </div>
     <div class="d-grid gap-2">
-        <Button Type="ButtonType.Submit" Disabled="!formInvalid" Color="ButtonColor.Primary"> Save </Button>
+        <Button Type="ButtonType.Submit" Color="ButtonColor.Primary"> Save </Button>
     </div>
 </EditForm>

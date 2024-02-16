@@ -8,9 +8,16 @@ namespace Blazor.Todo.Pages.Components
 	public partial class AssignmentForm
 	{
 		private bool formInvalid = true;
-		public Assignment Assignment { get; set; } = new Assignment();
+        private EditContext? _editContext;
+        public Assignment Assignment { get; set; } = new Assignment();
 		[Parameter] public EventCallback<Assignment> HandleAddAssignment { get; set; }
         [Inject] protected ToastService ToastService { get; set; } = default!;
+
+        protected override void OnInitialized()
+        {
+            _editContext = new EditContext(Assignment);
+            _editContext.OnFieldChanged += HandleFieldChanged;
+        }
 
         private void OnValidSubmit()
 		{
@@ -21,5 +28,11 @@ namespace Blazor.Todo.Pages.Components
                 ToastService.Notify(new(ToastType.Success, $"Assignment was added successfully"));
             }
 		}
+
+        private void HandleFieldChanged(object? sender, FieldChangedEventArgs e)
+        {
+            formInvalid = (bool)!_editContext?.Validate()!;
+            StateHasChanged();
+        }
     }
 }

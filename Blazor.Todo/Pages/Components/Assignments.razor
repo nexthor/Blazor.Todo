@@ -1,11 +1,18 @@
-﻿@if (AssignmentsList.Any())
+﻿<ConfirmDialog @ref="dialog" />
+@if (AssignmentsList.Any())
 {
     <ul class="list-group">
         @foreach (var assignment in AssignmentsList)
         {
-            <li class="list-group-item">
-                <input @onclick="(() => UpdateAssignmentStatus(assignment.Id))" class="form-check-input me-1" type="checkbox" value="" id="assignment-@assignment.Id" checked="@assignment.Finished">
-                <label class="form-check-label@(assignment.Finished ? " text-decoration-line-through fst-italic" : "")" for="assignment-@assignment.Id">@assignment.Title</label>
+            <li class="list-group-item d-flex">
+                <div>
+                    <input disabled="@assignment.Finished" @onclick="(() => UpdateAssignmentStatus(assignment.Id))" class="form-check-input me-1" type="checkbox" value="" id="assignment-@assignment.Id" checked="@assignment.Finished">
+                    <label class="form-check-label@(assignment.Finished ? " text-decoration-line-through fst-italic" : "")" for="assignment-@assignment.Id">@assignment.Title</label>
+                </div>
+                @if (assignment.Finished)
+                {
+                    <button @onclick="(() => DeleteAssignment(assignment.Id))" class="btn btn-danger btn-sm ms-auto">Delete</button>
+                }
             </li>
         }
     </ul>

@@ -27,5 +27,11 @@ namespace Blazor.Todo.Pages
 
 			StateHasChanged();
 		}
+
+		private void DeleteAssignment(int id)
+		{
+            assignments.RemoveAll(a => a.Id == id);
+            StateHasChanged();
+        }
 	}
 }
